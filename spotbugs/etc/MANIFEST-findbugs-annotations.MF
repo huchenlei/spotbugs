@@ -9,3 +9,4 @@ Export-Package: edu.umd.cs.findbugs.annotations,
  javax.annotation.meta,
  net.jcip.annotations
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.apache.bcel
