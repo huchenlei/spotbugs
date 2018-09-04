@@ -313,3 +313,9 @@ apply from: "$rootDir/gradle/jigsaw.gradle"
 
 // XML validation
 // TODO : validate
+
+task runFinalJar(type: JavaExec, dependsOn: installDist) {
+  classpath = files('build/install/lib/spotbugs.jar')
+  classpath += sourceSets.main.runtimeClasspath
+  main = "edu.umd.cs.findbugs.LaunchAppropriateUI"
+}
