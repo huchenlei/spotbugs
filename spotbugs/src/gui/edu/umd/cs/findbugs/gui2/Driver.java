@@ -20,6 +20,7 @@
 package edu.umd.cs.findbugs.gui2;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
@@ -30,6 +31,9 @@ import edu.umd.cs.findbugs.Version;
 import edu.umd.cs.findbugs.config.AnalysisFeatureSetting;
 import edu.umd.cs.findbugs.util.JavaWebStart;
 
+import soot.jimple.infoflow.Infoflow;
+import soot.jimple.infoflow.InfoflowConfiguration;
+
 /**
  * This is where it all begins run with -f int to set font size run with -clear
  * to clear recent projects menu, or any other issues with program not starting
@@ -38,6 +42,29 @@ import edu.umd.cs.findbugs.util.JavaWebStart;
  *
  */
 public class Driver {
+
+    private static void analysis() {
+        Infoflow infoflow = new Infoflow();
+
+        InfoflowConfiguration config = infoflow.getConfig();
+        config.setImplicitFlowMode(InfoflowConfiguration.ImplicitFlowMode.NoImplicitFlows);
+
+        infoflow.computeInfoflow(
+                "/Users/Charlie/repos/ECE419/ecs.jar",
+                "",
+                "<app_kvECS.ECSClient: void main(java.lang.String[])>",
+                Arrays.asList(
+                        "<java.io.BufferedReader: java.lang.String readLine()>"
+                ),
+                Arrays.asList(
+                        "<ecs.ECS: ecs.IECSNode addNode(java.lang.String,int)>",
+                        "<ecs.ECS: boolean removeNodes(java.util.Collection)>",
+                        "<app_kvECS.ECSClient: void handleCommand(java.lang.String)>",
+                        "<app_kvECS.ECSClient: void printError(java.lang.String)>"
+                )
+        );
+    }
+
     private static final String USAGE = Driver.class.getName() + " [options] [project or analysis results file]";
 
     private static GUI2CommandLine commandLine = new GUI2CommandLine();
@@ -46,6 +73,8 @@ public class Driver {
 
     public static void main(String[] args) throws Exception {
         try {
+//            Experiment to verify flowdroid is working properly
+//            analysis();
 
             String name = "SpotBugs GUI";
             if (JavaWebStart.isRunningViaJavaWebstart()) {
