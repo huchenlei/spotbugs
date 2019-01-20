@@ -19,17 +19,15 @@
 
 package edu.umd.cs.findbugs.gui2;
 
-import java.io.File;
-import java.util.Locale;
-
-import javax.swing.JOptionPane;
-
-import ca.utoronto.ece496.Experiment;
 import edu.umd.cs.findbugs.Plugin;
 import edu.umd.cs.findbugs.SystemProperties;
 import edu.umd.cs.findbugs.Version;
 import edu.umd.cs.findbugs.config.AnalysisFeatureSetting;
 import edu.umd.cs.findbugs.util.JavaWebStart;
+
+import javax.swing.*;
+import java.io.File;
+import java.util.Locale;
 
 
 /**
