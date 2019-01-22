@@ -1344,330 +1344,319 @@ cast to double. Often, what was meant was to cast the integer operands
 to double and then perform the division.
 </p>
 ]]>
-   </Details>
-    </Detector>
+    </Details>
+  </Detector>
   <Detector class="edu.umd.cs.findbugs.detect.FindBadCast2">
-     <Details>
- <![CDATA[
- <p>
- This detector looks for bad casts of object references using data flow analysis.
- </p>
- ]]>
-     </Details>
-   </Detector>
+    <Details>
+<![CDATA[
+<p>
+This detector looks for bad casts of object references using data flow analysis.
+</p>
+]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.FindNonSerializableStoreIntoSession">
+    <Details>
+<![CDATA[
+<p>
+This detector looks for stores of non Serializable objects into HTTP sessions.
+</p>
+]]>
+    </Details>
+  </Detector>
 
-    <Detector class="edu.umd.cs.findbugs.detect.NewBug">
-      <Details>
-        <![CDATA[
-  <p>
-  This detector looks for bad casts of object references using data flow analysis.
+  <Detector class="edu.umd.cs.findbugs.detect.FindUseOfNonSerializableValue">
+    <Details>
+<![CDATA[
+<p>
+This detector looks for uses of non Serializable objects in contexts that require them to be serializable.
+</p>
+]]>
+    </Details>
+  </Detector>
+
+
+  <Detector class="edu.umd.cs.findbugs.detect.FindNonSerializableValuePassedToWriteObject">
+    <Details>
+<![CDATA[
+<p>
+This detector looks for non Serializable objects passed to the writeObject method of
+an ObjectOutput.
+</p>
+]]>
+    </Details>
+  </Detector>
+
+
+
+  <Detector class="edu.umd.cs.findbugs.detect.BadSyntaxForRegularExpression">
+    <Details>
+<![CDATA[
+<p> This detector looks for regular expressions that have invalid syntax.  </p>
+]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.FindPuzzlers">
+    <Details>
+<![CDATA[
+<p> This detector looks for miscellaneous small errors
+mentioned by Joshua Bloch and Neal Gafter in
+their work on Programming Puzzlers.
   </p>
-  ]]>
-      </Details>
-    </Detector>
-
-    <Detector class="edu.umd.cs.findbugs.detect.FindNonSerializableStoreIntoSession">
-      <Details>
-  <![CDATA[
-  <p>
-  This detector looks for stores of non Serializable objects into HTTP sessions.
-  </p>
-  ]]>
-      </Details>
-    </Detector>
-
-    <Detector class="edu.umd.cs.findbugs.detect.FindUseOfNonSerializableValue">
-      <Details>
-  <![CDATA[
-  <p>
-  This detector looks for uses of non Serializable objects in contexts that require them to be serializable.
-  </p>
-  ]]>
-      </Details>
-    </Detector>
-
-
-    <Detector class="edu.umd.cs.findbugs.detect.FindNonSerializableValuePassedToWriteObject">
-      <Details>
-  <![CDATA[
-  <p>
-  This detector looks for non Serializable objects passed to the writeObject method of
-  an ObjectOutput.
-  </p>
-  ]]>
-      </Details>
-    </Detector>
-
-
-
-    <Detector class="edu.umd.cs.findbugs.detect.BadSyntaxForRegularExpression">
-      <Details>
-  <![CDATA[
-  <p> This detector looks for regular expressions that have invalid syntax.  </p>
-  ]]>
-      </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.FindPuzzlers">
-      <Details>
-  <![CDATA[
-  <p> This detector looks for miscellaneous small errors
-  mentioned by Joshua Bloch and Neal Gafter in
-  their work on Programming Puzzlers.
-    </p>
-  ]]>
-      </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.FindSleepWithLockHeld">
-      <Details>
-        <![CDATA[
-        <p>
-           This detector looks for calls to Thread.sleep() made with
-           a lock held.  It is a slow detector.
-        </p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.DuplicateBranches">
-      <Details>
-  <![CDATA[
-  <p> This detector looks for if/else or switch statements that have the
-  same code for two branches, thus rendering the test useless. This often
-  is caused by copying and pasting the two branches, causing incorrect logic
-  for the one branch.</p><p></p>
-  ]]>
-      </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.InefficientMemberAccess">
-      <Details>
-  <![CDATA[
-  <p> This detector looks for internal classes that write to member variables of the
-  owning class, when that member variable is private. In this case, a special compiler
-  generated accessor method needs to be used to write to this variable. Relaxing the
-  visibility to protected will allow the field to be directly written.</p>
-  <p></p>
-  ]]>
-      </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.XMLFactoryBypass">
-      <Details>
-  <![CDATA[
-  <p> This detector looks for direct allocations of implementations of XML interfaces.
-  This ties the code to a specific implementation, rather than using the supplied
-  factory pattern to create these objects.</p>
-  <p></p>
-  ]]>
-      </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.UselessSubclassMethod">
-      <Details>
-        <![CDATA[
-        <p>
-        This detector looks for subclasses that implement methods defined in the super
-        class, that only pass the parameters untouched to the parent class method.
-        These methods can just be removed.
-        </p>
-        <p></p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.ConfusedInheritance">
-      <Details>
-        <![CDATA[
-        <p>
-        This detector looks for final classes that declare protected members. As this
-        class can not be derived from, the use of protected access for members is
-        incorrect. The access should be changed to public or private to represent
-        the correct intention of the field. This was probably caused by a change in
-        use for this class, without completely changing all of the class to the new
-        paradigm.
-        </p>
-        <p></p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.QuestionableBooleanAssignment">
-      <Details>
-        <![CDATA[
-        <p>
-        This detector looks for simple assignments of literal boolean values to variables in
-        conditional expressions.
-        </p>
-        <p></p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.TrainNullReturnValues">
-      <Details>
-        <![CDATA[
-        <p>
-        TrainNullReturnValues determines which methods may return null and saves
-        them to a file.  The resulting file may be used in a subsequent
-        pass to improve the precision of the null-dereference detector.
-        Since this is just a training pass, no warnings are reported.
-        </p>
-        <p>
-        This is a slow detector.
-        </p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.TrainUnconditionalDerefParams">
-      <Details>
-        <![CDATA[
-        <p>
-        TrainUnconditionalParamDerefs determines which methods may
-        unconditionally dereference parameters and saves them to a file.
-        The resulting file may be used in a subsequent
-        pass to improve the precision of the null-dereference detector.
-        Since this is just a training pass, no warnings are reported.
-        </p>
-        <p>
-        This is a slow detector.
-        </p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.TrainFieldStoreTypes">
-      <Details>
-        <![CDATA[
-        <p>
-        TrainFieldStoreTypes analyzes the types stored into fields
-        and stores them to a database.  The database may be used in a later
-        pass to make type analysis more precise.
-        </p>
-        <p>
-        This is a slow detector.
-        </p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.TrainNonNullAnnotations">
-      <Details>
-        <![CDATA[
-        <p>
-        TrainNonNullAnnotations collects @Nonnull and @PossiblyNull annotations
-        and stores them to database files.  This is a fast detector.
-        </p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.CheckCalls">
-      <Details>
-        <![CDATA[
-        <p>This detector is just for debugging method call resolution in SpotBugs.
-        Don't enable it.</p>
-        ]]>
-     </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.FindBugsSummaryStats">
-      <Details>
-  <![CDATA[
-  <p> This detector just collects summary statistics information about the analysis process. </p>
-  ]]>
-      </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.TestASM">
-      <Details>
+]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.FindSleepWithLockHeld">
+    <Details>
       <![CDATA[
       <p>
-      This detector is a code example showing how to write a SpotBugs
-      detector using the ASM bytecode analysis framework.
+         This detector looks for calls to Thread.sleep() made with
+         a lock held.  It is a slow detector.
       </p>
       ]]>
-      </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.FindUnrelatedTypesInGenericContainer">
-      <Details>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.DuplicateBranches">
+    <Details>
+<![CDATA[
+<p> This detector looks for if/else or switch statements that have the
+same code for two branches, thus rendering the test useless. This often
+is caused by copying and pasting the two branches, causing incorrect logic
+for the one branch.</p><p></p>
+]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.InefficientMemberAccess">
+    <Details>
+<![CDATA[
+<p> This detector looks for internal classes that write to member variables of the
+owning class, when that member variable is private. In this case, a special compiler
+generated accessor method needs to be used to write to this variable. Relaxing the
+visibility to protected will allow the field to be directly written.</p>
+<p></p>
+]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.XMLFactoryBypass">
+    <Details>
+<![CDATA[
+<p> This detector looks for direct allocations of implementations of XML interfaces.
+This ties the code to a specific implementation, rather than using the supplied
+factory pattern to create these objects.</p>
+<p></p>
+]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.UselessSubclassMethod">
+    <Details>
       <![CDATA[
-      <p> This detector looks at the arguments of calls to generic
-      collection methods that receive a <code>java.lang.Object</code>
-      to see if the argument's type is related to the collection's
-      parameter. Arguments with unrelated class types are never going
-      to be in the collection. For example, if <code>foo</code> is a
-      <code>List&lt;String&gt;</code> and <code>bar</code> is a
-      <code>StringBuffer</code>, the call <code>foo.contains(bar)</code>
-      will always return false. This is a fast detector.
+      <p>
+      This detector looks for subclasses that implement methods defined in the super
+      class, that only pass the parameters untouched to the parent class method.
+      These methods can just be removed.
+      </p>
+      <p></p>
+      ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.ConfusedInheritance">
+    <Details>
+      <![CDATA[
+      <p>
+      This detector looks for final classes that declare protected members. As this
+      class can not be derived from, the use of protected access for members is
+      incorrect. The access should be changed to public or private to represent
+      the correct intention of the field. This was probably caused by a change in
+      use for this class, without completely changing all of the class to the new
+      paradigm.
+      </p>
+      <p></p>
+      ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.QuestionableBooleanAssignment">
+    <Details>
+      <![CDATA[
+      <p>
+      This detector looks for simple assignments of literal boolean values to variables in
+      conditional expressions.
+      </p>
+      <p></p>
+      ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.TrainNullReturnValues">
+    <Details>
+      <![CDATA[
+      <p>
+      TrainNullReturnValues determines which methods may return null and saves
+      them to a file.  The resulting file may be used in a subsequent
+      pass to improve the precision of the null-dereference detector.
+      Since this is just a training pass, no warnings are reported.
+      </p>
+      <p>
+      This is a slow detector.
       </p>
       ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.TrainUnconditionalDerefParams">
+    <Details>
+      <![CDATA[
+      <p>
+      TrainUnconditionalParamDerefs determines which methods may
+      unconditionally dereference parameters and saves them to a file.
+      The resulting file may be used in a subsequent
+      pass to improve the precision of the null-dereference detector.
+      Since this is just a training pass, no warnings are reported.
+      </p>
+      <p>
+      This is a slow detector.
+      </p>
+      ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.TrainFieldStoreTypes">
+    <Details>
+      <![CDATA[
+      <p>
+      TrainFieldStoreTypes analyzes the types stored into fields
+      and stores them to a database.  The database may be used in a later
+      pass to make type analysis more precise.
+      </p>
+      <p>
+      This is a slow detector.
+      </p>
+      ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.TrainNonNullAnnotations">
+    <Details>
+      <![CDATA[
+      <p>
+      TrainNonNullAnnotations collects @Nonnull and @PossiblyNull annotations
+      and stores them to database files.  This is a fast detector.
+      </p>
+      ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.CheckCalls">
+    <Details>
+      <![CDATA[
+      <p>This detector is just for debugging method call resolution in SpotBugs.
+      Don't enable it.</p>
+      ]]>
+   </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.FindBugsSummaryStats">
+    <Details>
+<![CDATA[
+<p> This detector just collects summary statistics information about the analysis process. </p>
+]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.TestASM">
+    <Details>
+    <![CDATA[
+    <p>
+    This detector is a code example showing how to write a SpotBugs
+    detector using the ASM bytecode analysis framework.
+    </p>
+    ]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.FindUnrelatedTypesInGenericContainer">
+    <Details>
+    <![CDATA[
+    <p> This detector looks at the arguments of calls to generic
+    collection methods that receive a <code>java.lang.Object</code>
+    to see if the argument's type is related to the collection's
+    parameter. Arguments with unrelated class types are never going
+    to be in the collection. For example, if <code>foo</code> is a
+    <code>List&lt;String&gt;</code> and <code>bar</code> is a
+    <code>StringBuffer</code>, the call <code>foo.contains(bar)</code>
+    will always return false. This is a fast detector.
+    </p>
+    ]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.StaticCalendarDetector">
+    <Details>
+<![CDATA[
+<p>This detector warns about static fields of type java.util.Calendar or java.text.DateFormat (and subclasses) because
+ Calendars are inherently unsafe for multithreaded use.
+</p>
+]]>
+</Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.TestDataflowAnalysis">
+    <Details>
+      <![CDATA[
+          <p>This is an internal detector used only for testing dataflow analyses.
+          It is not enabled by default.</p>
+      ]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.CheckTypeQualifiers">
+    <Details>
+      <![CDATA[
+        <p>Check for violations of properties specified by JSR-305
+        type qualifier annotations.</p>
+      ]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.AppendingToAnObjectOutputStream">
+    <Details>
+      <![CDATA[
+        <p>Looks for an attempt to append to an object output stream.</p>
+      ]]>
+    </Details>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.CheckExpectedWarnings">
+    <Details>
+          <![CDATA[
+          <p>Checks @ExpectedWarning and @NoWarning annotations.
+          This detector is used only for testing SpotBugs.</p>
+          ]]>
       </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.StaticCalendarDetector">
-      <Details>
-  <![CDATA[
-  <p>This detector warns about static fields of type java.util.Calendar or java.text.DateFormat (and subclasses) because
-   Calendars are inherently unsafe for multithreaded use.
-  </p>
-  ]]>
-  </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.TestDataflowAnalysis">
-      <Details>
-        <![CDATA[
-            <p>This is an internal detector used only for testing dataflow analyses.
-            It is not enabled by default.</p>
-        ]]>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.DontIgnoreResultOfPutIfAbsent">
+    <Details>
+          <![CDATA[
+          <p>Checks that if the result of putIfAbsent is ignored,
+            the value passed as the second argument is not reused. </p>
+          ]]>
       </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.CheckTypeQualifiers">
-      <Details>
-        <![CDATA[
-          <p>Check for violations of properties specified by JSR-305
-          type qualifier annotations.</p>
-        ]]>
+  </Detector>
+  <Detector
+    class="edu.umd.cs.findbugs.detect.ReadOfInstanceFieldInMethodInvokedByConstructorInSuperclass">
+    <Details>
+          <![CDATA[
+          <p>Checks for methods invoked from constructors for superclasses.  </p>
+          ]]>
       </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.AppendingToAnObjectOutputStream">
-      <Details>
-        <![CDATA[
-          <p>Looks for an attempt to append to an object output stream.</p>
-        ]]>
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.DefaultEncodingDetector">
+    <Details>
+<![CDATA[
+<p> Checks for calls to methods which perform a byte to String (or String to byte) conversion using the user's default
+ platform encoding. This can cause the application behaviour to vary between platforms.  </p>
+]]>
       </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.CheckExpectedWarnings">
-      <Details>
-            <![CDATA[
-            <p>Checks @ExpectedWarning and @NoWarning annotations.
-            This detector is used only for testing SpotBugs.</p>
-            ]]>
-        </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.DontIgnoreResultOfPutIfAbsent">
-      <Details>
-            <![CDATA[
-            <p>Checks that if the result of putIfAbsent is ignored,
-              the value passed as the second argument is not reused. </p>
-            ]]>
-        </Details>
-    </Detector>
-    <Detector
-      class="edu.umd.cs.findbugs.detect.ReadOfInstanceFieldInMethodInvokedByConstructorInSuperclass">
-      <Details>
-            <![CDATA[
-            <p>Checks for methods invoked from constructors for superclasses.  </p>
-            ]]>
-        </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.DefaultEncodingDetector">
-      <Details>
-  <![CDATA[
-  <p> Checks for calls to methods which perform a byte to String (or String to byte) conversion using the user's default
-   platform encoding. This can cause the application behaviour to vary between platforms.  </p>
-  ]]>
-        </Details>
-    </Detector>
-    <Detector class="edu.umd.cs.findbugs.detect.CheckRelaxingNullnessAnnotation">
-      <Details>
-        <![CDATA[
-          <p>Checks that overriding methods do not relax @Nonnull (made @CheckForNull) on return values
-          or @CheckForNull (made @Nonnull) on parameters.</p>
-        ]]>
-        </Details>
-    </Detector>
-    <!--
-    **********************************************************************
-    BugPatterns
-    **********************************************************************
-     -->
+  </Detector>
+  <Detector class="edu.umd.cs.findbugs.detect.CheckRelaxingNullnessAnnotation">
+    <Details>
+      <![CDATA[
+        <p>Checks that overriding methods do not relax @Nonnull (made @CheckForNull) on return values
+        or @CheckForNull (made @Nonnull) on parameters.</p>
+      ]]>
+      </Details>
+  </Detector>
+  <!--
+  **********************************************************************
+  BugPatterns
+  **********************************************************************
+   -->
   <BugPattern type="CNT_ROUGH_CONSTANT_VALUE">
     <ShortDescription>Rough value of known constant found</ShortDescription>
     <LongDescription>Rough value of {3} found: {2}</LongDescription>
@@ -7450,26 +7439,10 @@ an indication of some misunderstanding or some other logic error.
     </Details>
   </BugPattern>
   <BugPattern type="BC_VACUOUS_INSTANCEOF">
-  <ShortDescription>instanceof will always return true</ShortDescription>
-  <LongDescription>instanceof will always return true for all non-null values in {1}, since all {2} are instances of {3}</LongDescription>
-  <Details>
-    <![CDATA[
-<p>
-This instanceof test will always return true (unless the value being tested is null).
-Although this is safe, make sure it isn't
-an indication of some misunderstanding or some other logic error.
-If you really want to test the value for being null, perhaps it would be clearer to do
-better to do a null test rather than an instanceof test.
-</p>
-]]>
-  </Details>
-</BugPattern>
-
-  <BugPattern type="NEW_BUG_TYPE">
     <ShortDescription>instanceof will always return true</ShortDescription>
     <LongDescription>instanceof will always return true for all non-null values in {1}, since all {2} are instances of {3}</LongDescription>
     <Details>
-      <![CDATA[
+<![CDATA[
 <p>
 This instanceof test will always return true (unless the value being tested is null).
 Although this is safe, make sure it isn't
@@ -7480,7 +7453,6 @@ better to do a null test rather than an instanceof test.
 ]]>
     </Details>
   </BugPattern>
-
   <BugPattern type="BC_UNCONFIRMED_CAST">
     <ShortDescription>Unchecked/unconfirmed cast</ShortDescription>
     <LongDescription>Unchecked/unconfirmed cast from {2} to {3} in {1}</LongDescription>
@@ -8646,10 +8618,7 @@ after the call to initLogging, the logger configuration is lost
   <BugCode abbrev="ESync">Empty Synchronized blocks</BugCode>
   <BugCode abbrev="QF">Questionable for loops</BugCode>
   <BugCode abbrev="VA">Vararg problems</BugCode>
-
- <BugCode abbrev="BC">Bad casts of object references</BugCode>
-  <BugCode abbrev="TESTNEWBUG">Test new bug type</BugCode>
-
+  <BugCode abbrev="BC">Bad casts of object references</BugCode>
   <BugCode abbrev="IM">Questionable integer math</BugCode>
   <BugCode abbrev="ST">Misuse of static fields</BugCode>
   <BugCode abbrev="JCIP">Violation of net.jcip annotations</BugCode>

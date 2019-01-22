@@ -24,7 +24,6 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
-import ca.utoronto.ece496.Experiment;
 import edu.umd.cs.findbugs.Plugin;
 import edu.umd.cs.findbugs.SystemProperties;
 import edu.umd.cs.findbugs.Version;

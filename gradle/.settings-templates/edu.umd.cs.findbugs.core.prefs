@@ -39,6 +39,7 @@ detectorExplicitSerialization=ExplicitSerialization|true
 detectorFieldItemSummary=FieldItemSummary|true
 detectorFinalizerNullsFields=FinalizerNullsFields|true
 detectorFindBadCast2=FindBadCast2|true
+detectorNewBug=NewBug|true
 detectorFindBadForLoop=FindBadForLoop|true
 detectorFindBugsSummaryStats=FindBugsSummaryStats|true
 detectorFindCircularDependencies=FindCircularDependencies|false
