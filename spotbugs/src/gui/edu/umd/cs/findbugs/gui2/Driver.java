@@ -19,6 +19,11 @@
 
 package edu.umd.cs.findbugs.gui2;
 
+import java.io.File;
+import java.util.Locale;
+
+import javax.swing.JOptionPane;
+
 import edu.umd.cs.findbugs.Plugin;
 import edu.umd.cs.findbugs.SystemProperties;
 import edu.umd.cs.findbugs.Version;

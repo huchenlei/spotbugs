@@ -1685,6 +1685,7 @@
       <ClassStats class="edu.umd.cs.findbugs.detect.FieldItemSummary" sourceFile="FieldItemSummary.java" interface="false" size="75" bugs="0"/>
       <ClassStats class="edu.umd.cs.findbugs.detect.FinalizerNullsFields" sourceFile="FinalizerNullsFields.java" interface="false" size="45" bugs="0"/>
       <ClassStats class="edu.umd.cs.findbugs.detect.FindBadCast2" sourceFile="FindBadCast2.java" interface="false" size="281" bugs="0"/>
+      <ClassStats class="edu.umd.cs.findbugs.detect.NewBug" sourceFile="NewBug.java" interface="false" size="281" bugs="0"/>
       <ClassStats class="edu.umd.cs.findbugs.detect.FindBadForLoop" sourceFile="FindBadForLoop.java" interface="false" size="39" bugs="0"/>
       <ClassStats class="edu.umd.cs.findbugs.detect.FindBugsSummaryStats" sourceFile="FindBugsSummaryStats.java" interface="false" size="77" bugs="0"/>
       <ClassStats class="edu.umd.cs.findbugs.detect.FindCircularDependencies" sourceFile="FindCircularDependencies.java" interface="false" size="89" bugs="0"/>

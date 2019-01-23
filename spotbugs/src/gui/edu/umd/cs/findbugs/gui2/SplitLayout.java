@@ -39,6 +39,12 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 import edu.umd.cs.findbugs.L10N;
 
 /**
+* public void getResults(){
+ *     ReportSerializerTest.infofollow.
+ * }
+*/
+
+/**
  * @author pugh
  */
 public class SplitLayout implements FindBugsLayoutManager {

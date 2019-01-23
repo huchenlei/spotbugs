@@ -6,9 +6,9 @@
                 update-url="http://update.findbugs.org/update-check">
 
     <!--
-Plugin descriptor for SpotBugs "core" plugin.
-This plugin is enabled by default.
--->
+ Plugin descriptor for SpotBugs "core" plugin.
+ This plugin is enabled by default.
+ -->
     <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud"
            cloudClass="edu.umd.cs.findbugs.cloud.DoNothingCloud"
            usernameClass="edu.umd.cs.findbugs.cloud.username.NoNameLookup"/>
@@ -79,10 +79,10 @@ This plugin is enabled by default.
             />
         </WithinPass>
         <!--
-NoteSuppressedWarnings should be run in
-an earlier pass than all reporting detectors, including those in
-other plugins.
--->
+ NoteSuppressedWarnings should be run in
+ an earlier pass than all reporting detectors, including those in
+ other plugins.
+ -->
         <SplitPass>
             <Earlier class="edu.umd.cs.findbugs.detect.NoteSuppressedWarnings"/>
             <LaterCategory name="reporting" spanplugins="true"/>
@@ -281,9 +281,9 @@ other plugins.
 
 
         <!--
-Make CheckExpectedWarnings run in a separate pass, after all
-reporting detectors have completed.
--->
+ Make CheckExpectedWarnings run in a separate pass, after all
+ reporting detectors have completed.
+ -->
         <SplitPass>
             <EarlierCategory name="reporting" spanplugins="true"/>
             <Later class="edu.umd.cs.findbugs.detect.CheckExpectedWarnings"/>
@@ -291,6 +291,7 @@ reporting detectors have completed.
     </OrderingConstraints>
     <Detector class="edu.umd.cs.findbugs.detect.FindRoughConstants"
               reports="CNT_ROUGH_CONSTANT_VALUE" speed="fast" hidden="false"/>
+
 
     <Detector class="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" speed="fast"
               reports="" hidden="true"/>
@@ -567,18 +568,19 @@ reporting detectors have completed.
     <Detector class="edu.umd.cs.findbugs.detect.IDivResultCastToDouble" speed="fast"
               reports="ICAST_IDIV_CAST_TO_DOUBLE,ICAST_INT_CAST_TO_DOUBLE_PASSED_TO_CEIL,ICAST_INT_CAST_TO_FLOAT_PASSED_TO_ROUND"/>
     <Detector class="edu.umd.cs.findbugs.detect.FindBadCast2" speed="fast"
-              reports="BC_BAD_CAST_TO_CONCRETE_COLLECTION,BC_BAD_CAST_TO_ABSTRACT_COLLECTION,BC_UNCONFIRMED_CAST,BC_UNCONFIRMED_CAST_OF_RETURN_VALUE,BC_IMPOSSIBLE_CAST,BC_IMPOSSIBLE_INSTANCEOF,BC_VACUOUS_INSTANCEOF,NP_NULL_INSTANCEOF,BC_IMPOSSIBLE_DOWNCAST,BC_IMPOSSIBLE_DOWNCAST_OF_TOARRAY"/>
+              reports="BC_BAD_CAST_TO_CONCRETE_COLLECTION,BC_BAD_CAST_TO_ABSTRACT_COLLECTION,BC_UNCONFIRMED_CAST,BC_UNCONFIRMED_CAST_OF_RETURN_VALUE,BC_IMPOSSIBLE_CAST,BC_IMPOSSIBLE_INSTANCEOF,BC_VACUOUS_INSTANCEOF,NP_NULL_INSTANCEOF,BC_IMPOSSIBLE_DOWNCAST,BC_IMPOSSIBLE_DOWNCAST_OF_TOARRAY" />
+    <Detector class="edu.umd.cs.findbugs.detect.NewBug" speed="fast"
+              reports="NEW_BUG_TYPE" />
 
     <Detector class="edu.umd.cs.findbugs.detect.FindUseOfNonSerializableValue"
-              speed="fast"
-              reports="J2EE_STORE_OF_NON_SERIALIZABLE_OBJECT_INTO_SESSION,DMI_NONSERIALIZABLE_OBJECT_WRITTEN"/>
+              speed="fast" reports="J2EE_STORE_OF_NON_SERIALIZABLE_OBJECT_INTO_SESSION,DMI_NONSERIALIZABLE_OBJECT_WRITTEN"/>
 
     <Detector class="edu.umd.cs.findbugs.detect.FindNonSerializableStoreIntoSession"
               speed="fast" reports="J2EE_STORE_OF_NON_SERIALIZABLE_OBJECT_INTO_SESSION"
-              disabled="true" hidden="true"/>
+              disabled="true" hidden="true"  />
     <Detector class="edu.umd.cs.findbugs.detect.FindNonSerializableValuePassedToWriteObject"
               speed="fast" reports="DMI_NONSERIALIZABLE_OBJECT_WRITTEN"
-              disabled="true" hidden="true"/>
+              disabled="true" hidden="true"  />
 
     <Detector class="edu.umd.cs.findbugs.detect.BadSyntaxForRegularExpression" speed="fast"
               reports="RE_BAD_SYNTAX_FOR_REGULAR_EXPRESSION,RE_POSSIBLE_UNINTENDED_PATTERN,RE_CANT_USE_FILE_SEPARATOR_AS_REGULAR_EXPRESSION"/>
@@ -1177,7 +1179,11 @@ reporting detectors have completed.
     <BugPattern abbrev="BC" type="BC_IMPOSSIBLE_DOWNCAST_OF_TOARRAY" category="CORRECTNESS"
                 cweid="570"/>
     <BugPattern abbrev="BC" type="BC_IMPOSSIBLE_INSTANCEOF" category="CORRECTNESS" cweid="570"/>
+
+
     <BugPattern abbrev="BC" type="BC_VACUOUS_INSTANCEOF" category="STYLE" cweid="571"/>
+    <BugPattern abbrev="TESTNEWBUG" type="NEW_BUG_TYPE" category="STYLE" cweid="571"/>
+
     <BugPattern abbrev="BC" type="BC_BAD_CAST_TO_ABSTRACT_COLLECTION" category="STYLE"/>
     <BugPattern abbrev="RE" type="RE_POSSIBLE_UNINTENDED_PATTERN" category="CORRECTNESS"/>
     <BugPattern abbrev="RE" type="RE_BAD_SYNTAX_FOR_REGULAR_EXPRESSION" category="CORRECTNESS"/>
@@ -1255,8 +1261,11 @@ reporting detectors have completed.
                 category="MT_CORRECTNESS"/>
     <BugPattern abbrev="LG" type="LG_LOST_LOGGER_DUE_TO_WEAK_REFERENCE"
                 category="EXPERIMENTAL"/>
-    <BugPattern abbrev="Dm" type="DM_DEFAULT_ENCODING" category="I18N"/>
-    <BugPattern abbrev="NP" type="NP_METHOD_RETURN_RELAXING_ANNOTATION" category="STYLE"/>
-    <BugPattern abbrev="NP" type="NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" category="STYLE"/>
-    <BugPattern abbrev="NP" type="NP_METHOD_PARAMETER_RELAXING_ANNOTATION" category="STYLE" deprecated="true"/>
+    <BugPattern abbrev="Dm" type="DM_DEFAULT_ENCODING" category="I18N" />
+    <BugPattern abbrev="NP" type="NP_METHOD_RETURN_RELAXING_ANNOTATION" category="STYLE" />
+    <BugPattern abbrev="NP" type="NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" category="STYLE" />
+    <BugPattern abbrev="NP" type="NP_METHOD_PARAMETER_RELAXING_ANNOTATION" category="STYLE" deprecated="true" />
+
 </FindbugsPlugin>
+
+

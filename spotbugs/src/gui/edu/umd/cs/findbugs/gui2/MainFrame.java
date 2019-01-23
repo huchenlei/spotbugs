@@ -334,6 +334,7 @@ public class MainFrame extends FBFrame implements LogSync {
         mainFrameTree.setWaitStatusLabelText(msg); // should not be the URL
         if (msg.length() == 0) {
             msg = "https://github.com/spotbugs";
+            //msg = "https://github.com/spugs";
         }
         statusBarLabel.setText(msg);
     }
