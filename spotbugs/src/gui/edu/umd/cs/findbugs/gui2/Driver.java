@@ -30,6 +30,10 @@ import edu.umd.cs.findbugs.Version;
 import edu.umd.cs.findbugs.config.AnalysisFeatureSetting;
 import edu.umd.cs.findbugs.util.JavaWebStart;
 
+import javax.swing.*;
+import java.io.File;
+import java.util.Locale;
+
 
 /**
  * This is where it all begins run with -f int to set font size run with -clear

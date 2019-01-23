@@ -169,8 +169,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
      * Set the detector factory collection to be used by this FindBugs2 engine.
      * This method should be called before the execute() method is called.
      *
-     * @param detectorFactoryCollection
-     *            The detectorFactoryCollection to set.
+     * @param detectorFactoryCollection The detectorFactoryCollection to set.
      */
     @Override
     public void setDetectorFactoryCollection(DetectorFactoryCollection detectorFactoryCollection) {
@@ -270,7 +269,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                     Map<String, ICodeBaseEntry> codebase = classPath.getApplicationCodebaseEntries();
                     if (analysisOptions.noClassOk) {
                         System.err.println("No classfiles specified; output will have no warnings");
-                    } else if  (codebase.isEmpty()) {
+                    } else if (codebase.isEmpty()) {
                         throw new IOException("No files to analyze could be opened");
                     } else {
                         throw new NoClassesFoundToAnalyzeException(classPath);
@@ -486,7 +485,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                 String message = "Unable to read filter: " + entry.getKey() + " : " + e.getMessage();
                 if (getBugReporter() != null) {
                     getBugReporter().logError(message, e);
-                } else if (deferredError == null){
+                } else if (deferredError == null) {
                     deferredError = new IllegalArgumentException(message, e);
                 }
             }
@@ -502,7 +501,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                 String message = "Unable to read filter: " + entry.getKey() + " : " + e.getMessage();
                 if (getBugReporter() != null) {
                     getBugReporter().logError(message, e);
-                } else if (deferredError == null){
+                } else if (deferredError == null) {
                     deferredError = new IllegalArgumentException(message, e);
                 }
             }
@@ -521,7 +520,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                 String message = "Unable to read filter: " + excludeFilterFile + " : " + e.getMessage();
                 if (getBugReporter() != null) {
                     getBugReporter().logError(message, e);
-                } else if (deferredError == null){
+                } else if (deferredError == null) {
                     deferredError = new IllegalArgumentException(message, e);
                 }
             }
@@ -579,8 +578,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
      * This method is protected to allow clients override it and possibly reuse
      * some previous analysis data (for Eclipse interactive re-build)
      *
-     * @throws IOException
-     *             if error occurs registering analysis engines in a plugin
+     * @throws IOException if error occurs registering analysis engines in a plugin
      */
     protected IAnalysisCache createAnalysisCache() throws IOException {
         IAnalysisCache analysisCache = ClassFactory.instance().createAnalysisCache(classPath, bugReporter);
@@ -597,11 +595,11 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
         Global.setAnalysisCacheForCurrentThread(analysisCache);
         return analysisCache;
     }
+
     /**
      * Register the "built-in" analysis engines with given IAnalysisCache.
      *
-     * @param analysisCache
-     *            an IAnalysisCache
+     * @param analysisCache an IAnalysisCache
      */
     public static void registerBuiltInAnalysisEngines(IAnalysisCache analysisCache) {
         new edu.umd.cs.findbugs.classfile.engine.EngineRegistrar().registerAnalysisEngines(analysisCache);
@@ -613,15 +611,13 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
      * Register all of the analysis engines defined in the plugins contained in
      * a DetectorFactoryCollection with an IAnalysisCache.
      *
-     * @param detectorFactoryCollection
-     *            a DetectorFactoryCollection
-     * @param analysisCache
-     *            an IAnalysisCache
+     * @param detectorFactoryCollection a DetectorFactoryCollection
+     * @param analysisCache             an IAnalysisCache
      * @throws IOException
      */
     public static void registerPluginAnalysisEngines(DetectorFactoryCollection detectorFactoryCollection,
-            IAnalysisCache analysisCache) throws IOException {
-        for (Iterator<Plugin> i = detectorFactoryCollection.pluginIterator(); i.hasNext();) {
+                                                     IAnalysisCache analysisCache) throws IOException {
+        for (Iterator<Plugin> i = detectorFactoryCollection.pluginIterator(); i.hasNext(); ) {
             Plugin plugin = i.next();
 
             Class<? extends IAnalysisEngineRegistrar> engineRegistrarClass = plugin.getEngineRegistrarClass();
@@ -647,10 +643,8 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
     /**
      * Build the classpath from project codebases and system codebases.
      *
-     * @throws InterruptedException
-     *             if the analysis thread is interrupted
-     * @throws IOException
-     *             if an I/O error occurs
+     * @throws InterruptedException     if the analysis thread is interrupted
+     * @throws IOException              if an I/O error occurs
      * @throws CheckedAnalysisException
      */
     private void buildClassPath() throws InterruptedException, IOException, CheckedAnalysisException {
@@ -685,7 +679,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
         // Also, use the last modified time of application codebases
         // to set the project timestamp.
         List<String> pathNames = new ArrayList<>();
-        for (Iterator<? extends ICodeBase> i = classPath.appCodeBaseIterator(); i.hasNext();) {
+        for (Iterator<? extends ICodeBase> i = classPath.appCodeBaseIterator(); i.hasNext(); ) {
             ICodeBase appCodeBase = i.next();
 
             if (appCodeBase.containsSourceFiles()) {
@@ -845,15 +839,12 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
      * Create the AnalysisContext that will serve as the BCEL-compatibility
      * layer over the AnalysisCache.
      *
-     * @param project
-     *            The project
-     * @param appClassList
-     *            list of ClassDescriptors identifying application classes
-     * @param sourceInfoFileName
-     *            name of source info file (null if none)
+     * @param project            The project
+     * @param appClassList       list of ClassDescriptors identifying application classes
+     * @param sourceInfoFileName name of source info file (null if none)
      */
     public static void createAnalysisContext(Project project, List<ClassDescriptor> appClassList,
-            @CheckForNull String sourceInfoFileName) throws  IOException {
+                                             @CheckForNull String sourceInfoFileName) throws IOException {
         AnalysisContext analysisContext = new AnalysisContext(project);
 
         // Make this the current analysis context
@@ -870,7 +861,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
         }
     }
 
-    public static void setAppClassList(List<ClassDescriptor> appClassList)  {
+    public static void setAppClassList(List<ClassDescriptor> appClassList) {
         AnalysisContext analysisContext = AnalysisContext
                 .currentAnalysisContext();
 
@@ -891,8 +882,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
     /**
      * Create an execution plan.
      *
-     * @throws OrderingConstraintException
-     *             if the detector ordering constraints are inconsistent
+     * @throws OrderingConstraintException if the detector ordering constraints are inconsistent
      */
     private void createExecutionPlan() throws OrderingConstraintException {
         executionPlan = new ExecutionPlan();
@@ -923,7 +913,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
             System.out.println("rank threshold is " + rankThreshold);
         }
         // Add plugins
-        for (Iterator<Plugin> i = detectorFactoryCollection.pluginIterator(); i.hasNext();) {
+        for (Iterator<Plugin> i = detectorFactoryCollection.pluginIterator(); i.hasNext(); ) {
             Plugin plugin = i.next();
             if (DEBUG) {
                 System.out.println("Adding plugin " + plugin.getPluginId() + " to execution plan");
@@ -982,7 +972,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
 
             long startTime = System.currentTimeMillis();
             bugReporter.getProjectStats().setReferencedClasses(referencedClassSet.size());
-            for (Iterator<AnalysisPass> passIterator = executionPlan.passIterator(); passIterator.hasNext();) {
+            for (Iterator<AnalysisPass> passIterator = executionPlan.passIterator(); passIterator.hasNext(); ) {
                 AnalysisPass pass = passIterator.next();
                 // The first pass is generally a non-reporting pass which
                 // gathers information about referenced classes.
@@ -999,7 +989,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                 Collection<ClassDescriptor> classCollection = (isNonReportingFirstPass) ? referencedClassSet : appClassList;
                 AnalysisContext.currentXFactory().canonicalizeAll();
                 if (PROGRESS || LIST_ORDER) {
-                    System.out.printf("%6d : Pass %d: %d classes%n", (System.currentTimeMillis() - startTime)/1000, passCount,  classCollection.size());
+                    System.out.printf("%6d : Pass %d: %d classes%n", (System.currentTimeMillis() - startTime) / 1000, passCount, classCollection.size());
                     if (DEBUG) {
                         XFactory.profile();
                     }
@@ -1035,7 +1025,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                     long classStartNanoTime = 0;
                     if (PROGRESS) {
                         classStartNanoTime = System.nanoTime();
-                        System.out.printf("%6d %d/%d  %d/%d %s%n", (System.currentTimeMillis() - startTime)/1000,
+                        System.out.printf("%6d %d/%d  %d/%d %s%n", (System.currentTimeMillis() - startTime) / 1000,
                                 passCount, executionPlan.getNumPasses(), count,
                                 classCollection.size(), classDescriptor);
                     }
@@ -1054,7 +1044,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                     boolean isHuge = currentAnalysisContext.isTooBig(classDescriptor);
                     if (isHuge && currentAnalysisContext.isApplicationClass(classDescriptor)) {
                         bugReporter.reportBug(new BugInstance("SKIPPED_CLASS_TOO_BIG", Priorities.NORMAL_PRIORITY)
-                        .addClass(classDescriptor));
+                                .addClass(classDescriptor));
                     }
                     currentClassName = ClassName.toDottedClassName(classDescriptor.getClassName());
                     notifyClassObservers(classDescriptor);
@@ -1096,12 +1086,12 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
                         profiler.endContext(currentClassName);
                         currentAnalysisContext.clearClassBeingAnalyzed();
                         if (PROGRESS) {
-                            long usecs = (System.nanoTime() - classStartNanoTime)/1000;
+                            long usecs = (System.nanoTime() - classStartNanoTime) / 1000;
                             if (usecs > 15000) {
                                 int classSize = currentAnalysisContext.getClassSize(classDescriptor);
-                                long speed = usecs /classSize;
+                                long speed = usecs / classSize;
                                 if (speed > 15) {
-                                    System.out.printf("  %6d usecs/byte  %6d msec  %6d bytes  %d pass %s%n", speed, usecs/1000, classSize, passCount,
+                                    System.out.printf("  %6d usecs/byte  %6d msec  %6d bytes  %d pass %s%n", speed, usecs / 1000, classSize, passCount,
                                             classDescriptor);
                                 }
                             }
@@ -1121,6 +1111,8 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
             }
 
 
+        } catch (Exception e) {
+            bugReporter.logError(e.getMessage());
         } finally {
 
             bugReporter.finish();
@@ -1136,8 +1128,7 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
     /**
      * Notify all IClassObservers that we are visiting given class.
      *
-     * @param classDescriptor
-     *            the class being visited
+     * @param classDescriptor the class being visited
      */
     private void notifyClassObservers(ClassDescriptor classDescriptor) {
         for (IClassObserver observer : classObserverList) {
@@ -1149,12 +1140,9 @@ public class FindBugs2 implements IFindBugsEngine, AutoCloseable {
      * Report an exception that occurred while analyzing a class with a
      * detector.
      *
-     * @param classDescriptor
-     *            class being analyzed
-     * @param detector
-     *            detector doing the analysis
-     * @param e
-     *            the exception
+     * @param classDescriptor class being analyzed
+     * @param detector        detector doing the analysis
+     * @param e               the exception
      */
     private void logRecoverableException(ClassDescriptor classDescriptor, Detector2 detector, Throwable e) {
         bugReporter.logError(
