@@ -1,5 +1,6 @@
 package ca.utoronto.ece496.detector;
 
+import ca.utoronto.ece496.utils.SootFormatAdapter;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.Detector2;
 import edu.umd.cs.findbugs.ba.XMethod;
@@ -55,7 +56,8 @@ public class RequestMappingDetector implements Detector2 {
                     ).contains(annotationValue.getAnnotationClass().getDottedClassName()))
                     .collect(Collectors.toList());
 
-            if (!annotationValues.isEmpty()) entryPoints.add(xMethod.getSignature());
+            if (!annotationValues.isEmpty())
+                entryPoints.add(SootFormatAdapter.toSootMethodString(xMethod.getMethodDescriptor()));
         }
     }
 
@@ -65,6 +67,6 @@ public class RequestMappingDetector implements Detector2 {
      */
     @Override
     public void finishPass() {
-
+        System.out.println(entryPoints);
     }
 }
