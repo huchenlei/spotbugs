@@ -1,6 +1,7 @@
 package ca.utoronto.ece496.utils;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import soot.jimple.infoflow.Infoflow;
 import soot.jimple.infoflow.InfoflowConfiguration;
@@ -12,7 +13,10 @@ import java.util.Set;
 
 /**
  * Created by Charlie on 09. 01 2019
+ * The test instance shall no longer be used
  */
+@Deprecated
+@Ignore
 public class ReportSerializerTest {
     public static InfoflowResults analysis() {
         Infoflow infoflow = new Infoflow();

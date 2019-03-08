@@ -10,4 +10,5 @@ Export-Package: edu.umd.cs.findbugs.annotations,
  net.jcip.annotations
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.apache.bcel,
- com.google.gson
+ com.google.gson,
+ org.objectweb.asm.tree
