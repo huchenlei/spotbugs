@@ -93,10 +93,18 @@ public class RequestMappingDetector implements Detector2 {
         InfoflowConfiguration.PathConfiguration pathConfiguration = config.getPathConfiguration();
         pathConfiguration.setPathReconstructionMode(InfoflowConfiguration.PathReconstructionMode.Precise);
 
-        List<String> sources = Arrays.asList("<java.io.BufferedReader: java.lang.String readLine()>");
-        List<String> sinks = Arrays.asList("<java.io.PrintStream: void println(java.lang.String)>");
+        List<String> sources = new ArrayList<>(
+                Arrays.asList("<java.io.BufferedReader: java.lang.String readLine()>")
+        );
+
+        List<String> sinks = new ArrayList<>(
+                Arrays.asList("<java.io.PrintStream: void println(java.lang.String)>")
+        );
 
         // -end-
+
+        sources.add(SpringAppEntryPointCreator.getDefaultSourceSignature());
+        sinks.add(SpringAppEntryPointCreator.getDefaultSinkSignature());
 
         infoflow.setConfig(config);
         infoflow.computeInfoflow(
@@ -111,6 +119,6 @@ public class RequestMappingDetector implements Detector2 {
     }
 
     private void reportBugs(InfoflowResults results) {
-
+        results.printResults();
     }
 }

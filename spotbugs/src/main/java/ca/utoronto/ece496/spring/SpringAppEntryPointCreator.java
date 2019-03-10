@@ -26,7 +26,7 @@ import java.util.*;
  * <p>
  * Created by Charlie on 04. 03 2019
  */
-@SuppressWarnings("JavadocReference")
+@SuppressWarnings({"JavadocReference", "PackageAccessibility"})
 public class SpringAppEntryPointCreator extends BaseEntryPointCreator {
     /**
      * Config object to control behaviour of the entry point creator
