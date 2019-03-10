@@ -1,16 +1,19 @@
 package ca.utoronto.ece496.detector;
 
+import ca.utoronto.ece496.spring.SpringAppEntryPointCreator;
 import ca.utoronto.ece496.utils.GeneralUtil;
 import ca.utoronto.ece496.utils.SootFormatAdapter;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.Detector2;
 import edu.umd.cs.findbugs.Project;
+import edu.umd.cs.findbugs.SourceLineAnnotation;
 import edu.umd.cs.findbugs.ba.AnalysisContext;
 import edu.umd.cs.findbugs.ba.XMethod;
 import edu.umd.cs.findbugs.classfile.CheckedAnalysisException;
 import edu.umd.cs.findbugs.classfile.ClassDescriptor;
 import edu.umd.cs.findbugs.classfile.analysis.AnnotationValue;
 import soot.jimple.infoflow.Infoflow;
+import soot.jimple.infoflow.InfoflowConfiguration;
 import soot.jimple.infoflow.entryPointCreators.DefaultEntryPointCreator;
 import soot.jimple.infoflow.results.InfoflowResults;
 
@@ -87,16 +90,21 @@ public class RequestMappingDetector implements Detector2 {
 
         Infoflow infoflow = new Infoflow();
 
-//        InfoflowConfiguration config = infoflow.getConfig();
-//        config.setImplicitFlowMode(InfoflowConfiguration.ImplicitFlowMode.NoImplicitFlows);
+        // following items shall come from config file
+        InfoflowConfiguration config = new InfoflowConfiguration();
+        InfoflowConfiguration.PathConfiguration pathConfiguration = config.getPathConfiguration();
+        pathConfiguration.setPathReconstructionMode(InfoflowConfiguration.PathReconstructionMode.Precise);
 
         List<String> sources = Arrays.asList("<java.io.BufferedReader: java.lang.String readLine()>");
         List<String> sinks = Arrays.asList("<java.io.PrintStream: void println(java.lang.String)>");
 
+        // -end-
+
+        infoflow.setConfig(config);
         infoflow.computeInfoflow(
                 String.join(File.pathSeparator, project.getAuxClasspathEntryList().toArray(new String[]{})),
                 String.join(File.pathSeparator, project.getFileArray()),
-                new DefaultEntryPointCreator(entryPoints), // TODO change this to SpringAppEntryPointCreator
+                new SpringAppEntryPointCreator(entryPoints),
                 sources,
                 sinks
         );
@@ -105,6 +113,6 @@ public class RequestMappingDetector implements Detector2 {
     }
 
     private void reportBugs(InfoflowResults results) {
-        // TODO report bugs as BugInstances
+
     }
 }
