@@ -126,6 +126,10 @@ public class RequestMappingDetector implements Detector2 {
         reportBugs(infoflow.getResults());
     }
 
+    private static String getSootSignatureFromStmt(Stmt stmt) {
+        return stmt.containsInvokeExpr() ? stmt.getInvokeExpr().getMethod().toString() : "<unknown: void unknown()>";
+    }
+
     private void reportBugs(InfoflowResults results) {
         for (DataFlowResult dataFlowResult : results.getResultSet()) {
             ResultSinkInfo sink = dataFlowResult.getSink();
@@ -138,22 +142,39 @@ public class RequestMappingDetector implements Detector2 {
             fullPath.addFirst(source.getStmt());
             fullPath.addLast(sink.getStmt());
 
+            String sinkMethod = getSootSignatureFromStmt(sink.getStmt());
+            String sinkDescription =
+                    sinkMethod.equals(SpringAppEntryPointCreator.getDefaultSinkSignature()) ?
+                            "Default Sink (Return value of request handling method)" :
+                            sinkMethod;
+
+            String sourceMethod = getSootSignatureFromStmt(source.getStmt());
+            String sourceDescription =
+                    sourceMethod.equals(SpringAppEntryPointCreator.getDefaultSourceSignature()) ?
+                            "Default Source (Input param of request handling method)" :
+                            sinkMethod;
+
+            String pathDescription = "path...";
+
             for (Stmt stmt : fullPath) {
                 if (stmt.containsInvokeExpr()) {
-                    String sootMethodSignature = stmt.getInvokeExpr().getMethod().toString();
-                    MethodDescriptor descriptor = SootFormatAdapter.toMethodDescriptor(sootMethodSignature);
+                    MethodDescriptor descriptor = SootFormatAdapter.toMethodDescriptor(getSootSignatureFromStmt(stmt));
 
                     accumulator.accumulateBug(
                             new BugInstance(this, "GENERAL_XSS", Priorities.NORMAL_PRIORITY)
-                                    .addClassAndMethod(descriptor),
+                                    .addString(sourceDescription)
+                                    .addString(sinkDescription)
+                                    .addString(pathDescription)
+                                    .addClassAndMethod(descriptor)
+                            ,
                             SourceLineAnnotation.forFirstLineOfMethod(descriptor)
-                            );
+                    );
                 } else {
-                    bugReporter.logError("Statement does not contain invoke expr " + stmt);
+                    // For debugging purpose
+                    System.err.println("Statement does not contain invoke expr " + stmt);
                 }
             }
-
-            accumulator.reportAccumulatedBugs();
         }
+        accumulator.reportAccumulatedBugs();
     }
 }

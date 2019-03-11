@@ -8626,11 +8626,11 @@ after the call to initLogging, the logger configuration is lost
     <!--ECE496 start-->
     <BugPattern type="GENERAL_XSS">
         <ShortDescription>General Cross Site Scripting Venerability</ShortDescription>
-        <LongDescription>Taint Source type of {1} reaches Sink type of {2}</LongDescription>
+        <LongDescription>Taint Source type of {0} reaches Sink type of {1}</LongDescription>
         <Details>
             <![CDATA[
             Note: this is a general type of xss report, further classification is required <br>
-            XSS Accessing path: <br> {3}
+            XSS Accessing path: <br> {2}
             ]]>
         </Details>
     </BugPattern>
