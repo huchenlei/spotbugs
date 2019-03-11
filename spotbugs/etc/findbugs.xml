@@ -648,8 +648,9 @@
     <Detector class="edu.umd.cs.findbugs.detect.CheckRelaxingNullnessAnnotation" speed="fast"
               reports="NP_METHOD_RETURN_RELAXING_ANNOTATION,NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION"/>
 
+    <!--ECE496-->
     <Detector class="ca.utoronto.ece496.detector.RequestMappingDetector" speed="fast"
-              reports="NONE"/>
+              reports="GENERAL_XSS"/>
 
     <!-- Bug Categories -->
     <BugCategory category="NOISE" hidden="true"/>
@@ -1266,6 +1267,8 @@
     <BugPattern abbrev="NP" type="NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION" category="STYLE" />
     <BugPattern abbrev="NP" type="NP_METHOD_PARAMETER_RELAXING_ANNOTATION" category="STYLE" deprecated="true" />
 
+    <!--ECE496-->
+    <BugPattern abbrev="GXSS" type="GENERAL_XSS" category="STYLE"/>
 </FindbugsPlugin>
 
 
