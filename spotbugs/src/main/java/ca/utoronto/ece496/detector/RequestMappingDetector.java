@@ -154,27 +154,32 @@ public class RequestMappingDetector implements Detector2 {
                             "Default Source (Input param of request handling method)" :
                             sinkMethod;
 
-            String pathDescription = "path...";
+            List<MethodDescriptor> descriptors = fullPath.stream()
+                    .filter(Stmt::containsInvokeExpr)
+                    .map(stmt -> SootFormatAdapter.toMethodDescriptor(getSootSignatureFromStmt(stmt)))
+                    .collect(Collectors.toList());
 
-            for (Stmt stmt : fullPath) {
-                if (stmt.containsInvokeExpr()) {
-                    MethodDescriptor descriptor = SootFormatAdapter.toMethodDescriptor(getSootSignatureFromStmt(stmt));
+            assert !descriptors.isEmpty();
 
-                    accumulator.accumulateBug(
-                            new BugInstance(this, "GENERAL_XSS", Priorities.NORMAL_PRIORITY)
-                                    .addString(sourceDescription)
-                                    .addString(sinkDescription)
-                                    .addString(pathDescription)
-                                    .addClassAndMethod(descriptor)
-                            ,
-                            SourceLineAnnotation.forFirstLineOfMethod(descriptor)
-                    );
-                } else {
-                    // For debugging purpose
-                    System.err.println("Statement does not contain invoke expr " + stmt);
-                }
-            }
+            MethodDescriptor mainDescriptor = descriptors.stream()
+                    .filter(
+                            d -> !Arrays.asList(
+                                    SpringAppEntryPointCreator.getDefaultSinkSignature(),
+                                    SpringAppEntryPointCreator.getDefaultSourceSignature()
+                            ).contains(SootFormatAdapter.toSootMethodString(d))
+                    ).collect(Collectors.toList()).get(0); // note: there must be at least one real(not dummy)  method call in the path
+
+            List<SourceLineAnnotation> sourceLineAnnotations = descriptors.stream()
+                    .map(SourceLineAnnotation::forFirstLineOfMethod
+                    ).collect(Collectors.toList());
+
+            bugReporter.reportBug(
+                    new BugInstance(this, "GENERAL_XSS", Priorities.NORMAL_PRIORITY)
+                            .addString(sourceDescription)
+                            .addString(sinkDescription)
+                            .addAnnotations(sourceLineAnnotations)
+                            .addClassAndMethod(mainDescriptor)
+            );
         }
-        accumulator.reportAccumulatedBugs();
     }
 }

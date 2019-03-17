@@ -8630,7 +8630,7 @@ after the call to initLogging, the logger configuration is lost
         <Details>
             <![CDATA[
             Note: this is a general type of xss report, further classification is required <br>
-            XSS Accessing path: <br> {2}
+            XSS Accessing path: <br>
             ]]>
         </Details>
     </BugPattern>
